@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turtle - AndrewKind.com</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+    <link rel="icon" href="media/myfavicon.ico">
+
+</head>
+<body>
+  
+    <div class="container body-content">
+        
+
+
+
+<script src="Scripts/jquery-1.10.2.min.js"></script>
+
+
+<div>
+    <canvas id="canvas1" keepalive="true" ></canvas>
+</div>
+
+<div class="col-md-12">
+    <span><button style="float: right;" type="button" id="run-button" class="btn btn-success">Run!</button></span>
+    <span><button style="float: right;" type="button" id="clear-button" class="btn btn-warning">Clear</button></span>
+
+    <span><button style="float: left;" type="button" id="command-list-button" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Command List</button></span>
+
+    <span class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">
+            Examples
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+            <li role="presentation"><a role="menuitem" tabindex="-1" id="dropdown-square" href="#">Square</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" id="dropdown-squares" href="#">Squares</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" id="dropdown-spiral" href="#">Spiral</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" id="dropdown-spiral2" href="#">Spiral 2</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" id="dropdown-triangles" href="#">Triangles</a></li>
+            
+        </ul>
+    </span>
+
+    <textarea class="form-control" rows="20" id="commands-text"></textarea>
+</div>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" style="text-align: center;">Turtle Commands</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                   <div style="text-align: center;">Write any valid JavaScript code and the turtle will perform your actions.</div>
+                    
+                    <h3 style="text-align: center;">Commands</h3> 
+                    <ul>
+                        <li><strong>forward(distance);</strong><br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;ex: forward(100); // Turtle will go forward 100 steps <br /><br />
+                        </li>
+                        <li>
+                            <strong>backward(distance);</strong><br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;ex: backward(100); // Turtle will go backward 100 steps <br /><br />
+                        </li>
+                        <li>
+                            <strong>right(angle);</strong><br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;ex: right(45); // Turtle will rotate right 45 degrees <br /><br />
+                        </li>
+                        <li>
+                            <strong>left(angle);</strong><br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;ex: left(45); // Turtle will rotate Left 45 degrees <br /><br />
+                        </li>
+
+                        <li>
+                            <strong>circle(radius);</strong><br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;ex: circle(60); // Turtle will draw a circle of 60 pixel radius <br /><br />
+                        </li>
+                 
+                        <li>
+                            <strong>circle(radius);</strong><br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;ex: circle(60); // Turtle will draw a circle of 60 pixel radius <br /><br />
+                        </li>
+                        <li>
+                            <strong>penUp();</strong><br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;ex: penUp(); // Turtle will not draw <br /><br />
+                        </li>
+                        <li>
+                            <strong>penDown();</strong><br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;ex: penDown(); // Turtle will draw <br /><br />
+                        </li>
+                        <li>
+                            <strong>size(width);</strong><br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;ex: size(6); // Turtle will draw at width of 6 pixels<br /><br />
+                        </li>
+                        <li>
+                            <strong>penSpeed(speed);</strong><br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;ex: penSpeed(100); // Turtle will draw at the speed of 100 pixels per second<br /><br />
+                        </li>
+                        <li>
+                            <strong>color(color);</strong><br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;ex: color("blue"); // Turtle will draw in blue<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;ex: color("#ff0000"); // Turtle will draw in red<br />
+
+                        </li>
+                    </ul>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="Scripts/paper.js"></script>
+<script type="text/javascript" src="Scripts/mypaper.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(".dropdown-toggle").dropdown();
+
+        $("#dropdown-square").on("click", function (e) {
+            e.preventDefault();
+            setCommands("square");
+        });
+
+        $("#dropdown-spiral").on("click", function (e) {
+            e.preventDefault();
+            setCommands("spiral");
+        });
+
+        $("#dropdown-spiral2").on("click", function (e) {
+            e.preventDefault();
+            setCommands("spiral2");
+        });
+
+        $("#dropdown-triangles").on("click", function (e) {
+            e.preventDefault();
+            setCommands("triangles");
+        });
+
+        $("#dropdown-squares").on("click", function (e) {
+            e.preventDefault();
+            setCommands("squares");
+        });
+
+
+
+        $("#clear-button").on("click", function (e) {
+            e.preventDefault();
+            clear();
+        });
+
+    });
+
+    function clear() {
+
+        location.reload();
+        // home coordinates of the turtle
+        d = document.getElementById('canvas1');
+
+        running = false;
+        xhome = (paperX / 2);
+        yhome = ((paperY / 2) + 25);
+        
+        //setup turtle
+        turtle = {
+            homex: xhome,
+            homey: yhome,
+            starty: yhome,
+            startx: xhome,
+            turtleAngle: 90,
+            turtleSpeed: 5,
+            checkPac: 0,
+            penDrawing: 1,
+            penSize: 1,
+            penColor: 'black'
+         };
+         xcoord = turtle.homex;
+         ycoord = turtle.homey;
+    
+         speed = turtle.turtleSpeed;
+         penStatus = turtle.penDrawing;
+         penSize = turtle.penSize;
+         penColor = turtle.penColor;
+
+
+        //clear 
+       //  paper.project.activeLayer.clear();
+         console.log(paper.project.activeLayer);
+        // paper.project.activeLayer.removeChildren();
+         paper.project.activeLayer.removeChildren();
+         raster.remove();
+     //    paper.view.draw();
+         raster = new paper.Raster('/content/images/turtle/turtle.png');
+         raster.position.x = xcoord;
+         raster.position.y = ycoord;
+         raster.scale(0.25);
+         turtlePath = new paper.Path();
+         turtlePath.strokeColor = turtle.penColor;
+         turtlePath.strokeWidth = turtle.penSize;
+         turtlePath.add(new paper.Point(xcoord, ycoord));
+         turtleAngle = turtle.turtleAngle;
+         newAngle = 0;
+         getAngle = true;
+         getGoToAngle = true;
+         oldAngle = turtleAngle;
+         rasterAngle = turtleAngle;
+         eventList = [];
+         myEvents = [];
+         console.log(paper.project.activeLayer);
+
+
+    }
+                                               
+    function setCommands(pattern) {
+        switch (pattern) {
+            case "spiral":
+                var commands = document.getElementById("commands-text");
+                commands.value = "penSpeed(200); \n var x = 1; \n var y = 1; \n for (var i = 0; i < 200; i++) { \n     left(x); \n     forward(y); \n     x++; \n     y++; \n     color('#'+(Math.random()*0xFFFFFF<<0).toString(16)); \n }";
+                break;
+            case "spiral2":
+                var commands = document.getElementById("commands-text");
+                commands.value = "penSpeed(200); \nfor (var x = 0; x < 4; x++) { \n    var a = 1; \n    for (var y = 0; y < 100; y++) { \n        forward(5); \n        right(10 - a); \n        a++; \n    } \n}";
+                break;
+            case "triangles":
+                var commands = document.getElementById("commands-text");
+                commands.value = "penSpeed(50000); \nright(90); \nsize(2); \nfunction triangle(depth, base) { \n    penDown(); \n    if (depth == 0) { \n        for (var i = 0; i< 3; i++) { \n            forward(base); \n            left(120); \n        } \n    } \n    else { \n        for (var i = 0 ; i < 3; i++) { \n             triangle((depth - 1), base); \n            penUp() \n            forward(base * 2 * depth); \n            left(120); \n            penDown(); \n         } \n    } \n }    \ntriangle(4, 20); \npenUp(); \nbackward(500);   ";
+                break;
+            case "square":
+                var commands = document.getElementById("commands-text");
+                commands.value = "penSpeed(5); \nsize(4); \nfor (var x = 0; x < 4; x++) { \n    forward(70); \n    right(90); \n}";
+                break;
+            case "squares":
+                var commands = document.getElementById("commands-text");
+                commands.value = "penSpeed(5000); \nsize(4); \nfunction square(side) {\n    for (var i = 0; i < 4; i++) { \n        forward(side); \n        right(90);\n    }\n}\nfor (var i = 100; i > 0; i -= 10) { \n    square(i);\n    right(36); \n}";
+                break;
+            default: "";
+        }
+
+
+    }
+
+
+
+
+</script>
+<!-- Load the Paper.js library -->
+<!-- Define inlined PaperScript associate it with myCanvas -->
+
+
+<style>
+    #myCanvas {
+        border: 1px solid black;
+    }
+
+    .form-control {
+        display: block;
+        width: 100%;
+    }
+
+    input, select, textarea {
+        max-width: 100%;
+    }
+
+    .container {
+        max-width: 3000px;
+    }
+
+    .btn {
+        margin: 5px;
+    }
+</style>
+        <hr />
+        <footer id="footer">
+            <p>&copy; 2020 - AndrewKind.com <span style= "float: right;"></span></p> 
+        </footer>
+    </div>
+
+    <script src="bundles/jquery.js"></script>
+
+    <script src="bundles/bootstrap.js"></script>
+
+    
+</body>
+</html>
+
+<script>
+    $('.logo').mouseover(function () {
+        $(".navbar-brand").css("font-weight","700");
+    });
+
+    $('.logo').mouseleave(function () {
+        $(".navbar-brand").css("font-weight", "100");
+    });
+
+    $('.navbar-brand').mouseover(function () {
+        $(".navbar-brand").css("font-weight", "700");
+    });
+
+    $('.navbar-brand').mouseleave(function () {
+        $(".navbar-brand").css("font-weight", "100");
+    });
+</script>
