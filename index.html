@@ -44,9 +44,14 @@
         </button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
             <li role="presentation"><a role="menuitem" tabindex="-1" id="dropdown-square" href="#">Square</a></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" id="dropdown-squares" href="#">Squares</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" id="dropdown-sstarquares" href="#">Squares</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" id="dropdown-star" href="#">Star</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" id="dropdown-superstar" href="#">SuperStar</a></li>
+
             <li role="presentation"><a role="menuitem" tabindex="-1" id="dropdown-spiral" href="#">Spiral</a></li>
             <li role="presentation"><a role="menuitem" tabindex="-1" id="dropdown-spiral2" href="#">Spiral 2</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" id="dropdown-spiral3" href="#">Spiral 3</a></li>
+
             <li role="presentation"><a role="menuitem" tabindex="-1" id="dropdown-triangles" href="#">Triangles</a></li>
             
         </ul>
@@ -151,7 +156,10 @@
             e.preventDefault();
             setCommands("spiral2");
         });
-
+        $("#dropdown-spiral3").on("click", function (e) {
+            e.preventDefault();
+            setCommands("spiral3");
+        });
         $("#dropdown-triangles").on("click", function (e) {
             e.preventDefault();
             setCommands("triangles");
@@ -161,8 +169,14 @@
             e.preventDefault();
             setCommands("squares");
         });
-
-
+        $("#dropdown-star").on("click", function (e) {
+            e.preventDefault();
+            setCommands("star");
+        });
+        $("#dropdown-superstar").on("click", function (e) {
+            e.preventDefault();
+            setCommands("superstar");
+        });
 
         $("#clear-button").on("click", function (e) {
             e.preventDefault();
@@ -251,7 +265,19 @@
                 break;
             case "squares":
                 var commands = document.getElementById("commands-text");
-                commands.value = "penSpeed(5000); \nsize(4); \nfunction square(side) {\n    for (var i = 0; i < 4; i++) { \n        forward(side); \n        right(90);\n    }\n}\nfor (var i = 100; i > 0; i -= 10) { \n    square(i);\n    right(36); \n}";
+                commands.value = "penSpeed(5000); \nsize(3); \nfunction square(side) {\n    for (var i = 0; i < 4; i++) { \n        forward(side); \n        right(90);\n    }\n}\nfor (var i = 100; i > 0; i -= 1) { \n    square(i);\n    right(36); \n color('#'+(Math.random()*0xFFFFFF<<0).toString(16)); \n }";
+                break;
+                case "star":
+                var commands = document.getElementById("commands-text");
+                commands.value = "penSpeed(10); \nsize(3);\n penDown();\n for (var x = 0; x < 5; x++) { \n        forward(150); \n        right(144);\n }\n \n penUp();\n forward(1000);";
+                break;
+                case "superstar":
+                var commands = document.getElementById("commands-text");
+                commands.value = "penSpeed(110); \nsize(3);\n penDown();\n for (var x = 0; x < 51; x++) { \n        forward(x * 5); \n        right(144);\n }\n \n penUp();\n forward(1000);";
+                break;
+                case "spiral3":
+                var commands = document.getElementById("commands-text");
+                commands.value = "penSpeed(315); \nsize(1);\nfor (var x = 0; x < 6; x++) { \n        color(\"blue\"); \n        for(var i = 0; i < 51; i++) {\n                forward(50);\n                left(110);\n        }\n        color(\"red\"); \n        for (var i = 0; i < 51; i++) { \n                forward(100); \n                left(110); \n        }\n}";
                 break;
             default: "";
         }

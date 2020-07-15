@@ -3,9 +3,9 @@
 |                           |
 | Description:              |
 | Mypaper.js controls the 	|	
-| animation for the IPython	|
-| Notebook implementation	|
-| created by PACAttack.     |
+| animation for the Turtle  |
+| implementation	        |   
+| created by Andre Kind.    |
 |                           |
 '--------------------------*/
 
@@ -31,7 +31,7 @@ y = w.innerHeight || e.clientHeight || g.clientHeight;
 
 
 var paperX = x * 0.47;
-var paperY = y * 0.4;
+var paperY = y * 0.5;
 paper.view.viewSize.width = paperX;
 paper.view.viewSize.height = paperY;
 
@@ -56,7 +56,7 @@ var turtle = {
 
 d.style = "border:1px solid #000000;";
 // raster used for turtle image
-var raster = new paper.Raster('media/turtle.png');
+var raster = new paper.Raster('media/turtle-new.png');
 
 //raster used for the pause image	
 var pauseRaster = new paper.Raster('media/pause.png');
