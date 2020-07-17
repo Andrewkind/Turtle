@@ -56,10 +56,10 @@ var turtle = {
 
 d.style = "border:1px solid #000000;";
 // raster used for turtle image
-var raster = new paper.Raster('media/turtle-new.png');
+var raster = new paper.Raster('Media/turtle-new.png');
 
 //raster used for the pause image	
-var pauseRaster = new paper.Raster('media/pause.png');
+var pauseRaster = new paper.Raster('Media/pause.png');
 pauseRaster.scale(.5);
 pauseRaster.position.x = turtle.homex;
 pauseRaster.position.y = turtle.homey;
