@@ -32,6 +32,15 @@ y = w.innerHeight || e.clientHeight || g.clientHeight;
 
 var paperX = x * 0.47;
 var paperY = y * 0.5;
+
+if (x < 1025) {
+    //alert(x);
+ paperX = 320;
+ paperY = 180;   
+}
+
+
+
 paper.view.viewSize.width = paperX;
 paper.view.viewSize.height = paperY;
 
@@ -60,7 +69,7 @@ var raster = new paper.Raster('Media/turtle-new.png');
 
 //raster used for the pause image	
 var pauseRaster = new paper.Raster('Media/pause.png');
-pauseRaster.scale(.5);
+pauseRaster.scale(.25);
 pauseRaster.position.x = turtle.homex;
 pauseRaster.position.y = turtle.homey;
 // set pause raster to invisible
@@ -78,7 +87,7 @@ var penColor = turtle.penColor;
 raster.position.x = xcoord;
 raster.position.y = ycoord;
 // scale the image by 50%
-raster.scale(0.25);
+raster.scale(0.15);
 //speed of line movement
 var speed = turtle.turtleSpeed;
 // create path object for turtle
