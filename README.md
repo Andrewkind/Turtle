@@ -7,3 +7,5 @@ Turtle JavaScript App based on the old Turtle game I played on Apple Mac in elem
  Write JavaScript commands to move a turtle around and draw!
 
 ![Turtle](/turtle.png)
+![Turtle](/turtle2.png)
+![Turtle](/turtle3.png)
