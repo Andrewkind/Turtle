@@ -46,7 +46,7 @@ paper.view.viewSize.height = paperY;
 
 // home coordinates of the turtle
 var xhome = (paperX / 2);
-var yhome = ((paperY / 2) + 25);
+var yhome = ((paperY / 2) - 25);
 
 //setup turtle
 var turtle = {
