@@ -1,6 +1,6 @@
-# Turtle
+# Turtle.js
 
-Turtle JavaScript App based on the old Turtle game I played on Apple Mac in elementary school!! Now with additional colors :)
+JavaScript Turtle App based on retro Turtle educational game from the original Apple Macintosh. 
 
  https://andrewkind.github.io/Turtle/
  
